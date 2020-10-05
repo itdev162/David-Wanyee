@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "3+eYZ82mrZEzMr53y0Up/MI3yhpR+/HgqkNgSJJnozrCxbUUG33HK2TcDCwVVO9H4d/Io6miIuMIMpJNbL4kaQ==",
+  "success": true,
+  "projectFilePath": "/Users/dngw/Repositories/David-Wanyee-itdev162/David-Wanyee/Domain/Domain.csproj",
+  "expectedPackageFiles": [
+    "/Users/dngw/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "/Users/dngw/.nuget/packages/netstandard.library/2.0.3/netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
