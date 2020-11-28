@@ -39,6 +39,16 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[2.2.6, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -210,6 +220,14 @@
       "frameworks": {
         "netstandard2.0": {
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
             "NETStandard.Library": {
               "suppressParent": "All",
               "target": "Package",
