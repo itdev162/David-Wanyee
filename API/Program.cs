@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace API
 {
@@ -13,7 +16,23 @@ namespace API
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+            
+            using (var scope = host.Services.CreateScope())
+            {
+                var Services= scope.ServiceProvider;
+                try
+                {
+                    var context = Services.GetRequiredService<DataContext>();
+                    context.Database.Migrate();
+                }
+                catch
+                {
+                    var logger =Services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError("An error ocurred during migration.");
+                }
+            }
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
