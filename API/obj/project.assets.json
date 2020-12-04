@@ -1623,6 +1623,8 @@
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "2.2.6",
+          "Microsoft.EntityFrameworkCore.Sqlite": "2.2.6",
           "Persistence": "1.0.0"
         },
         "compile": {

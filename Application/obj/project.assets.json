@@ -4102,6 +4102,8 @@
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
       "Domain >= 1.0.0",
+      "Microsoft.EntityFrameworkCore >= 2.2.6",
+      "Microsoft.EntityFrameworkCore.Sqlite >= 2.2.6",
       "NETStandard.Library >= 2.0.3",
       "Persistence >= 1.0.0"
     ]
@@ -4148,6 +4150,14 @@
     "frameworks": {
       "netstandard2.0": {
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[2.2.6, )"
+          },
+          "Microsoft.EntityFrameworkCore.Sqlite": {
+            "target": "Package",
+            "version": "[2.2.6, )"
+          },
           "NETStandard.Library": {
             "suppressParent": "All",
             "target": "Package",
