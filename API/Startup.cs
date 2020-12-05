@@ -17,6 +17,8 @@ namespace API
 {
     public class Startup
     {
+        private readonly string CorsPolicy = "CorsPolicy";
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,7 +30,18 @@ namespace API
         [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy(CorsPolicy, policyBuilder => 
+                {
+                    policyBuilder
+                        .WithOrigins("http://localhost:3000")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
+            services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddDbContext<DataContext>(opt=>
             {
                 opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
@@ -45,19 +58,24 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
             }
-
+        
             //app.UseHsts();
+           
 
             //app.UseHttpsRedirection();
 
-            app.UseRouting();
+            app.UseCors(CorsPolicy);
 
-            app.UseAuthorization();
+            app.UseMvc();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            //app.UseRouting();
+
+            //app.UseAuthorization();
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //});
         }
     }
 }
