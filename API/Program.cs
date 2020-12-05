@@ -26,10 +26,10 @@ namespace API
                     var context = Services.GetRequiredService<DataContext>();
                     context.Database.Migrate();
                 }
-                catch
+                catch(Exception ex)
                 {
                     var logger =Services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError("An error ocurred during migration.");
+                    logger.LogError(ex,"An error ocurred during migration.");
                 }
             }
             host.Run();
