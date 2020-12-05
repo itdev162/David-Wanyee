@@ -18,11 +18,6 @@ namespace API
     public class Startup
     {
         private readonly string CorsPolicy = "CorsPolicy";
-        
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
 
         public IConfiguration Configuration { get; }
 
@@ -32,7 +27,7 @@ namespace API
         {
             services.AddCors(opt =>
             {
-                opt.AddPolicy(CorsPolicy, policyBuilder => 
+                opt.AddPolicy(CorsPolicy, policyBuilder=>
                 {
                     policyBuilder
                         .WithOrigins("http://localhost:3000")
@@ -42,13 +37,10 @@ namespace API
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
             services.AddMvc(options => options.EnableEndpointRouting = false);
-            services.AddDbContext<DataContext>(opt=>
+            services.AddDbContext<DataContext>(opt =>
             {
                 opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
-            }
-            );
-
-            
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,20 +50,15 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
             }
-        
+            else
+            {
             //app.UseHsts();
-           
-
+            }
             //app.UseHttpsRedirection();
-
             app.UseCors(CorsPolicy);
-
             app.UseMvc();
-
             //app.UseRouting();
-
             //app.UseAuthorization();
-
             //app.UseEndpoints(endpoints =>
             //{
             //    endpoints.MapControllers();
