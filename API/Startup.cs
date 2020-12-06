@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Persistence;
+using MediatR;
+using Application.Posts;
 
 namespace API
 {
@@ -30,6 +32,7 @@ namespace API
         [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddCors(opt =>
             {
                 opt.AddPolicy(CorsPolicy, policyBuilder=>
