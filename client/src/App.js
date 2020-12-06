@@ -15,7 +15,7 @@ class App extends React.Component {
       })
     })
       .catch((error) => {
-          console.error('Error fetching data: $error');
+          console.error('Error fetching data: $(error)');
       })
     }
 
@@ -25,6 +25,7 @@ class App extends React.Component {
         <header className="App-header">
           Blogbox
         </header>
+        {this.state.values.map((value: any) => <div key={value}>{value}</div>)}
       </div>
   );
   }
