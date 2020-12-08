@@ -5,7 +5,7 @@ import './styles.css';
 
 const PostListItem = props => 
 {
-    const {post, clickPost } = props;
+    const {post, clickPost, deletePost } = props;
     const history = useHistory();
 
     const handleClickPost = post =>{
@@ -21,6 +21,11 @@ const PostListItem = props =>
                 <h2>{post.title}</h2>
                 <p>{post.body}</p>
             </div>
+           <div className="postControls" >
+                <button onClick={() => deletePost(post)}>Delete</button>
+                <h2>{post.title}</h2>
+                <p>{post.body}</p>
+           </div> 
         </div>
     );
 };
