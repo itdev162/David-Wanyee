@@ -13,7 +13,7 @@ namespace API.Controllers
 [Route("api/[controller]")]
 [ApiController]
 
-    public class PostsController:ControllerBase
+    public class PostsController : ControllerBase
     {
         private readonly IMediator mediator;
         private readonly DataContext context;
