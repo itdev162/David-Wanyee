@@ -1,10 +1,16 @@
+/* jshint esversion: 6 */ 
 import './App.css';
 import React from 'react';
 import axios from 'axios';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import PostList from './components/PostList/PostList';
+import Post from './components/Post/Post';
 
 class App extends React.Component {
   state = {
-    values:[]
+    values:[],
+    posts:[],
+    post:null
   }
 
   componentDidMount(){
@@ -12,22 +18,43 @@ class App extends React.Component {
     .then((response) => {
       this.setState({
         values:response.data
-      })
+      });
     })
       .catch((error) => {
           console.error('Error fetching data: $(error)');
-      })
+      });
     }
 
+  viewPost = (post) => {
+    console.log('view' (post.title));
+    this.setState({
+        post: post
+    });
+  } 
+
   render(){
+    const{posts, post} = this.state;
+
     return (
-      <div className="App">
-        <header className="App-header">
-          Blogbox
-        </header>
-        {this.state.values.map((value: any) => <div key={value}>{value}</div>)}
-      </div>
-  );
+      <Router>
+        <div className="App">
+          <header className="App-header">
+            Blogbox
+          </header> 
+          <main className= "App-content">
+            <Switch>
+              <Route exact path="/">
+                <PostList posts={posts} clickPost={this.viewPost}/>
+              </Route>
+              <Route path= "/posts/:postId">
+                <Post post={post}/>
+              </Route>
+            </Switch>
+          </main>
+        {this.state.values.map((value) => <div key={value}>{value}</div>)} 
+        </div>
+      </Router>
+    );
   }
 }
 

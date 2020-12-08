@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */ 
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
