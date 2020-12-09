@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import uuid from 'uuid';
+import {v4 as uuid} from 'uuid';
 import moment from 'moment';
 import {useHistory} from 'react-router-dom';
-import './style.css';
+import './styles.css';
 
 const CreatePost = ({onPostCreated}) =>{
     let history = useHistory();
@@ -51,11 +51,13 @@ const CreatePost = ({onPostCreated}) =>{
                 //call the handler and redirect
                 onPostCreated(res.data);
                 history.push('/');
-            }catch(error){
-                    console.error('Error creating post: $(error.response.data)');
+            }
+            catch(error){
+                console.error('Error creating post: $(error.response.data)');
              }
             }
         };
+
     return(
         <div className="form-container">
             <h2>Create New Post</h2>
@@ -75,9 +77,7 @@ const CreatePost = ({onPostCreated}) =>{
             ></textarea>
             <button onClick = {() => create()}>Submit</button>
         </div>
-
-    )
-    
+    );
 };
 
 export default CreatePost;

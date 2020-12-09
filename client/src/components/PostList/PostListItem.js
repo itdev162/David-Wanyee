@@ -5,7 +5,7 @@ import './styles.css';
 
 const PostListItem = props => 
 {
-    const {post, clickPost, deletePost } = props;
+    const {post, clickPost, deletePost, editPost} = props;
     const history = useHistory();
 
     const handleClickPost = post =>{
@@ -13,6 +13,11 @@ const PostListItem = props =>
 
         clickPost(post);
         history.push(/posts/(slug));
+    };
+
+    const handledEditPost = post =>{
+        editPost(post);
+        history.push('/edit-post/$(post.id)');
     };
 
     return(
@@ -23,8 +28,7 @@ const PostListItem = props =>
             </div>
            <div className="postControls" >
                 <button onClick={() => deletePost(post)}>Delete</button>
-                <h2>{post.title}</h2>
-                <p>{post.body}</p>
+                <button onClick={() => handledEditPost(post)}>Edit</button>
            </div> 
         </div>
     );

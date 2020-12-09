@@ -1,20 +1,23 @@
 /* jshint esversion: 6 */ 
-import './App.css';
 import React from 'react';
 import axios from 'axios';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import PostList from './components/PostList/PostList';
 import Post from './components/Post/Post';
+import CreatePost from './components/Post/CreatePost';
+import EditPost from './components/Post/EditPost';
+import './App.css';
 
 class App extends React.Component {
   state = {
-    values:[],
+    //values:[],
     posts:[],
     post:null
-  }
+  };
 
   componentDidMount(){
-    axios.get('http://localhost:5000/api/values')
+    axios
+    .get('http://localhost:5000/api/values')
     .then((response) => {
       this.setState({
         values:response.data
@@ -34,9 +37,9 @@ class App extends React.Component {
 
   deletePost = post =>{
     axios
-      .delete('http://localhost:5000/api/post/$(post.id)')
+      .delete('http://localhost:5000/api/post/$(post._id)')
       .then(response =>{
-        const newPosts = this.state.posts.filter(p => p.id !==post.id);
+        const newPosts = this.state.posts.filter(p => p.id !==post._id);
          this.setState({
           posts: [...newPosts]
         });
@@ -44,7 +47,34 @@ class App extends React.Component {
       .catch(error => {
         console.error('Error deleting post: $(error)');
       })
-  }
+    }
+
+
+  editPost = post => {
+    this.setState({
+      post: post
+    });
+  };
+
+  onPostCreated = post => {
+    const newPosts = [...this.state.posts, post];
+
+    this.setState({
+      posts:newPosts
+    });
+  };
+
+  onPostUpdated = post => {
+    console.log('updated post:', post);
+    const newPosts = [...this.state.posts];
+    const index = newPosts.findIndex(p => p.id === post.id);
+
+    newPosts[index] = post;
+
+    this.setState({
+      posts:newPosts
+    });
+  };
 
   render(){
     const{posts, post} = this.state;
@@ -52,9 +82,11 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <header className="App-header">
-            Blogbox
-          </header> 
+          <header className="App-header">Blogbox</header> 
+          <nav>
+            <link to = "/">Home</link>
+            <link to = "/new-post">New Post</link>
+          </nav>  
           <main className= "App-content">
             <Switch>
               <Route exact path="/">
@@ -62,14 +94,21 @@ class App extends React.Component {
                 posts={posts} 
                 clickPost={this.viewPost}
                 deletePost={this.deletePost}
+                EditPost={this.EditPost}
                 />
               </Route>
               <Route path= "/posts/:postId">
                 <Post post={post}/>
               </Route>
+              <Route path = "/new-post">
+                <CreatePost onPostCreated={this.onPostCreated} />
+              </Route>
+              <Route path = "edit-post/:postId">
+                <EditPost post= {post} onPostUpdated={this.onPostUpdated} />
+              </Route>
             </Switch>
           </main>
-        {this.state.values.map((value) => <div key={value}>{value}</div>)} 
+        {/* {this.state.values.map((value) => <div key={value}>{value}</div>)}  */}
         </div>
       </Router>
     );

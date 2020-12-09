@@ -1,11 +1,14 @@
+/*
 .App {
   text-align: center;
 }
-
+*/
+/*
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
+*/
 
 /*
 @media (prefers-reduced-motion: no-preference) {
@@ -16,7 +19,7 @@
 */
 
 .App-header {
-  background-color: #282c34;
+  background-color: #c93c67;
   min-height: 10vh;
   display: flex;
   flex-direction: column;
@@ -44,3 +47,30 @@
   }
 }
 */
+
+nav{
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
+  background-color: #b8335c;
+}
+
+nav a{
+  font-weight: 700;
+  color:#ffffff;
+  text-decoration: none;
+  margin-right:20px;
+}
+
+button {
+font-size: 0.8em;
+font-weight: 700;
+color:#ffffff;
+background-color: #b8335c;
+border-color:#c93c67;
+}
+
+button:hover{
+  cursor:pointer;
+  background-color: #c93c67;
+}
