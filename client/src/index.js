@@ -6,13 +6,17 @@ import App from './App';
 //import * as serviceworker from './serviceWorker.ts';
 
 class index{
-render(){
-    ReactDOM.render(
-        <React.StrictMode>
-        <App/>
-        </React.StrictMode>,
-     document.getElementById('root')
-    );
-}
+    constructor(){
+        this.render();
+    }
+
+    render(){
+        ReactDOM.render(
+            <React.StrictMode>
+            <App/>
+            </React.StrictMode>,
+            document.getElementById('root')
+         );
+    }
 }
 export default index;
